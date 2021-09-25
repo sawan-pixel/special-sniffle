@@ -1,0 +1,50 @@
+<html>
+<head>
+   <title>listPage</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+<h1>Information Page</h1>
+<table>
+    <tr>
+        <th>USER_NAME</th>
+        <th>Email</th>
+        <th>Address</th>
+    </tr>
+    {% for i in post %}
+    <tr>
+        <td>{{ i.user_name }}</td>
+        <td>{{ i.email }}</td>
+        <td>{{ i.address }}</td>
+        <td>{{ i.id }}</td>
+
+        <td><a href="{% url 'update_data' i.id %} " class="btn btn-success">Update</a></td>
+        <td>
+            <form action="{% url 'delete_data' i.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Delete">
+            </form>
+        </td>
+
+    </tr>
+        {% endfor %}
+</table>
+<h1><a href="{% url 'logout' %}">Logout</a></h1>
+</body>
+</html>
